@@ -19,7 +19,6 @@
     </div>
 
     <div class="card shadow-sm">
-        <!-- تم إزالة animate__animated animate__fadeIn لتجنب مشاكل التحميل -->
         <div class="card-header bg-light py-3">
             <h5 class="mb-0"><i class="fas fa-user-shield me-2"></i>Liste des Utilisateurs</h5>
         </div>
@@ -61,7 +60,6 @@
                 </table>
             </div>
             
-            <!-- Card View for Mobile -->
             <div class="user-cards d-md-none d-none">
                 <div class="row g-3 p-3">
                     {% for user in users %}
@@ -94,7 +92,6 @@
         </div>
     </div>
     
-    <!-- Confirmation Modal -->
     <div class="modal fade" id="confirmModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -164,9 +161,7 @@
 {% block extra_js %}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // تم إزالة تهيئة tooltips لتجنب المشاكل
-        
-        // Toggle view between table and cards on mobile
+
         const addToggleViewButton = () => {
             if (window.innerWidth < 768) {
                 const toolbar = document.querySelector('.d-flex.gap-2');
@@ -194,10 +189,9 @@
             }
         };
         
-        // تأخير تنفيذ الدالة لضمان تحميل الصفحة بشكل كامل
         setTimeout(addToggleViewButton, 500);
         
-        // Search functionality
+
         const userSearch = document.getElementById('userSearch');
         const clearSearch = document.getElementById('clearSearch');
         
@@ -207,13 +201,11 @@
                 const tableRows = document.querySelectorAll('#dataTable tbody tr');
                 const userCards = document.querySelectorAll('.user-cards .card');
                 
-                // Filter table rows
                 tableRows.forEach(row => {
                     const text = row.textContent.toLowerCase();
                     row.style.display = text.includes(searchValue) ? '' : 'none';
                 });
                 
-                // Filter cards
                 userCards.forEach(card => {
                     const text = card.textContent.toLowerCase();
                     card.parentElement.style.display = text.includes(searchValue) ? '' : 'none';
@@ -228,7 +220,6 @@
             }
         }
         
-        // Delete confirmation - using modal instead of simple confirm
         const deleteButtons = document.querySelectorAll('.delete-confirm');
         const confirmModal = document.getElementById('confirmModal');
         const confirmDeleteBtn = document.getElementById('confirmDelete');
@@ -251,7 +242,6 @@
                 });
             });
         } else {
-            // Fallback to simple confirm if modal not available
             deleteButtons.forEach(button => {
                 button.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -266,7 +256,6 @@
             });
         }
         
-        // Add mobile search button
         const addMobileSearch = () => {
             if (window.innerWidth < 768) {
                 const cardHeader = document.querySelector('.card-header');
@@ -315,3 +304,4 @@
     });
 </script>
 {% endblock %}
+
